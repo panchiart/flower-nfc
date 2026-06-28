@@ -391,7 +391,7 @@
           <svg class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
           </svg>
-          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="75">
         </div>
       </div>
       <p class="sound-hint" id="soundHint">点击播放按钮，聆听自然声景</p>
@@ -657,7 +657,7 @@ function startNatureSound(flowerId) {
 
   masterGain = audioCtx.createGain();
   masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(volumeSlider.value / 100 * 0.35, audioCtx.currentTime + 1.5);
+  masterGain.gain.linearRampToValueAtTime(volumeSlider.value / 100 * 0.5, audioCtx.currentTime + 1.5);
   masterGain.connect(audioCtx.destination);
 
   console.log('🎵 Starting nature sound:', flowerId, '| State:', audioCtx.state, '| SampleRate:', audioCtx.sampleRate);
