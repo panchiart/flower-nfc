@@ -629,12 +629,30 @@ function createPinkNoise(ctx, duration = 60) {
 }
 
 function startNatureSound(flowerId) {
-  // 每次播放创建新的 AudioContext
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Safari 必须在用户交互中创建 AudioContext
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  } catch(e) {
+    console.error('AudioContext 创建失败:', e);
+    return;
+  }
   
-  // iOS/Safari 需要这个
+  // 强制解锁 Safari 的 AudioContext
+  const unlock = () => {
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().then(() => {
+        console.log('🔓 Safari AudioContext 已解锁');
+      }).catch(err => {
+        console.error('解锁失败:', err);
+      });
+    }
+  };
+  
+  unlock();
+  
+  // 额外保险：如果还是 suspended，再试一次
   if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
+    setTimeout(unlock, 100);
   }
 
   masterGain = audioCtx.createGain();
@@ -642,7 +660,7 @@ function startNatureSound(flowerId) {
   masterGain.gain.linearRampToValueAtTime(volumeSlider.value / 100 * 0.35, audioCtx.currentTime + 1.5);
   masterGain.connect(audioCtx.destination);
 
-  console.log('🎵 Starting nature sound:', flowerId, '| State:', audioCtx.state);
+  console.log('🎵 Starting nature sound:', flowerId, '| State:', audioCtx.state, '| SampleRate:', audioCtx.sampleRate);
 
   if (flowerId === 'lotus') playLotusRain(audioCtx, masterGain);
   else if (flowerId === 'osmanthus') playOsmanthusWind(audioCtx, masterGain);
@@ -665,14 +683,20 @@ function playLotusRain(ctx, dest) {
   lowpass.frequency.value = 2500;
 
   const gain = ctx.createGain();
-  gain.gain.value = 0.3;
+  gain.gain.setValueAtTime(0.3, ctx.currentTime);
 
   noise.connect(highpass);
   highpass.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
-  noise.start();
-  activeNodes.push(noise);
+  
+  try {
+    noise.start(0);
+    activeNodes.push(noise);
+    console.log('✅ 荷花雨声已启动');
+  } catch(e) {
+    console.error('启动失败:', e);
+  }
 
   // 水滴
   const dropInterval = setInterval(() => {
@@ -723,13 +747,19 @@ function playOsmanthusWind(ctx, dest) {
   lfo.start();
 
   const gain = ctx.createGain();
-  gain.gain.value = 0.22;
+  gain.gain.setValueAtTime(0.22, ctx.currentTime);
 
   noise.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
-  noise.start();
-  activeNodes.push(noise);
+  
+  try {
+    noise.start(0);
+    activeNodes.push(noise);
+    console.log('✅ 桂花风声已启动');
+  } catch(e) {
+    console.error('启动失败:', e);
+  }
 
   // 树叶沙沙
   const rustleInterval = setInterval(() => {
@@ -810,8 +840,13 @@ function playPlumSilence(ctx, dest) {
   noise.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
-  noise.start();
-  activeNodes.push(noise);
+  try {
+    noise.start(0);
+    activeNodes.push(noise);
+    console.log("✅ 雨声已启动");
+  } catch(e) {
+    console.error("启动失败:", e);
+  }
 
   // 偶尔的微风
   const breezeInterval = setInterval(() => {
