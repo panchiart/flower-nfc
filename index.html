@@ -16,7 +16,6 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
     :root {
       --paper:      #FDFCFA;
       --paper-dark: #F5F3EF;
@@ -28,8 +27,6 @@
       --green:      #8B9E7E;
       --border:     #E8E5E0;
     }
-
-    /* ── Typography ── */
     .latin {
       font-family: 'Cormorant Garamond', 'Times New Roman', serif;
       font-style: italic;
@@ -48,24 +45,25 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 0 48px;
       display: flex; justify-content: space-between; align-items: center;
-      height: 72px;
-      background: rgba(253,252,250,0.95);
+      height: 56px;
+      background: rgba(253, 252, 250, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    nav .logo {
-      font-size: 18px; font-weight: 400;
-      color: var(--ink);
+    nav .brand {
+      font-size: 15px;
       letter-spacing: 0.12em;
+      color: var(--ink);
     }
-    nav .logo span { color: var(--accent); }
-    nav .nav-links { display: flex; gap: 40px; list-style: none; }
-    nav .nav-links a {
-      text-decoration: none; color: var(--ink-muted);
-      font-size: 13px; letter-spacing: 0.06em;
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul li a {
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
       transition: color 0.2s;
     }
-    nav .nav-links a:hover { color: var(--ink); }
+    nav ul li a:hover { color: var(--ink); }
 
     /* ── Hero ── */
     .hero {
@@ -73,646 +71,1089 @@
       display: flex; flex-direction: column;
       justify-content: center; align-items: center;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 0 24px;
       position: relative;
-      background: var(--paper);
     }
     .hero::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(196,146,126,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 70%, rgba(139,158,126,0.06) 0%, transparent 60%);
+      pointer-events: none;
     }
     .hero-badge {
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--green);
-      border: 1px solid rgba(139,158,126,0.4);
-      padding: 6px 16px; border-radius: 20px;
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 24px;
       margin-bottom: 32px;
     }
     .hero h1 {
-      font-size: clamp(36px, 6vw, 64px);
-      font-weight: 300; line-height: 1.2;
-      color: var(--ink); margin-bottom: 16px;
-      letter-spacing: 0.08em;
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      color: var(--ink);
+      margin-bottom: 16px;
     }
     .hero .subtitle {
-      font-size: 16px; color: var(--ink-light);
-      font-weight: 300; letter-spacing: 0.04em;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink-light);
+      letter-spacing: 0.15em;
       margin-bottom: 48px;
     }
-    .hero-desc {
-      max-width: 480px;
-      font-size: 14px; color: var(--ink-muted);
-      line-height: 2;
-      margin-bottom: 48px;
+    .hero-ornament {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--ink-muted), transparent);
+      margin-bottom: 32px;
+      opacity: 0.4;
     }
     .scroll-hint {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 8px; color: var(--ink-muted);
-      font-size: 12px; letter-spacing: 0.1em;
-      animation: bounce 2s infinite;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--ink-muted);
+      animation: pulse 2.5s ease-in-out infinite;
     }
-    .scroll-hint span { font-size: 20px; }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: translateY(0); }
+      50% { opacity: 0.8; transform: translateY(4px); }
+    }
+
+    /* ── Section Titles ── */
+    .section-title {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--ink);
+    }
+    .section-title p {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 8px;
+      letter-spacing: 0.1em;
     }
 
     /* ── Herbarium Grid ── */
-    .herbarium {
-      padding: 80px 48px 120px;
-      background: var(--paper);
-    }
-    .herbarium-header {
-      text-align: center; margin-bottom: 64px;
-    }
-    .herbarium-header .section-label {
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--ink-muted); margin-bottom: 12px;
-    }
-    .herbarium-header h2 {
-      font-size: 28px; font-weight: 300;
-      color: var(--ink); letter-spacing: 0.06em;
-    }
-
-    .plant-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 48px;
-      max-width: 1200px;
+    #herbarium {
+      padding: 80px 48px 100px;
+      max-width: 960px;
       margin: 0 auto;
     }
-
-    /* ── Plant Card ── */
-    .plant-card {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 32px 28px 28px;
+    .herbarium-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+    .herbarium-card {
+      position: relative;
+      background: var(--paper-dark);
+      overflow: hidden;
       cursor: pointer;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
+      aspect-ratio: 4/5;
     }
-    .plant-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--accent); transform: scaleX(0);
-      transition: transform 0.4s ease;
+    .herbarium-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .plant-card:hover {
-      border-color: var(--accent-light);
-      box-shadow: 0 8px 40px rgba(196,146,126,0.12);
-      transform: translateY(-4px);
-    }
-    .plant-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .plant-card .latin-name {
-      font-size: 13px; color: var(--ink-light);
-      margin-bottom: 4px;
-    }
-    .plant-card .handwritten-name {
-      font-size: 14px; color: var(--ink-muted);
-      margin-bottom: 24px;
-      padding-left: 8px;
-    }
-
-    .plant-illustration {
-      width: 100%; aspect-ratio: 1;
-      background: linear-gradient(135deg, #F5F3EF 0%, #FAF8F5 100%);
-      border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .plant-illustration img {
-      width: 85%; height: 85%; object-fit: contain;
-      transition: transform 0.6s ease;
-    }
-    .plant-card:hover .plant-illustration img {
-      transform: scale(1.05);
-    }
-    .plant-illustration .play-overlay {
+    .herbarium-card:hover img { transform: scale(1.04); }
+    .herbarium-card .card-overlay {
       position: absolute; inset: 0;
-      background: rgba(253,252,250,0.9);
+      background: linear-gradient(to top, rgba(61,61,61,0.7) 0%, transparent 50%);
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.3s;
+      justify-content: flex-end;
+      padding: 24px 20px;
+      opacity: 0;
+      transition: opacity 0.4s;
     }
-    .plant-card:hover .play-overlay { opacity: 1; }
-    .play-btn {
-      width: 56px; height: 56px;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: var(--accent);
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s;
+    .herbarium-card:hover .card-overlay { opacity: 1; }
+    .card-overlay .card-name {
+      font-size: 18px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 0.2em;
+      margin-bottom: 2px;
     }
-    .play-btn:hover {
-      background: var(--accent); color: white;
+    .card-overlay .card-latin {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 8px;
     }
-    .play-text {
-      margin-top: 12px;
-      font-size: 12px; letter-spacing: 0.1em;
-      color: var(--ink-light);
-    }
-
-    .plant-info {
-      text-align: center;
-    }
-    .plant-info .cn-name {
-      font-size: 20px; font-weight: 400;
-      color: var(--ink); margin-bottom: 8px;
+    .card-overlay .card-tag {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
       letter-spacing: 0.1em;
     }
-    .plant-info .season {
-      font-size: 11px; color: var(--ink-muted);
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-    }
-    .plant-info .tags {
-      display: flex; gap: 8px; justify-content: center;
-      flex-wrap: wrap;
-    }
-    .tag {
-      font-size: 11px; color: var(--ink-muted);
-      border: 1px solid var(--border);
-      padding: 4px 10px; border-radius: 2px;
-    }
-
-    /* ── Detail Modal ── */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(253,252,250,0.95);
-      backdrop-filter: blur(8px);
-      z-index: 200;
-      display: none; align-items: center; justify-content: center;
-      padding: 24px;
-    }
-    .modal-overlay.active { display: flex; }
-    .modal-content {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      max-width: 900px; width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-    }
-    .modal-close {
-      position: absolute; top: 20px; right: 20px;
-      width: 40px; height: 40px;
-      border: 1px solid var(--border);
+    .card-play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.9);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: var(--ink-muted);
-      background: transparent; cursor: pointer;
-      transition: all 0.2s; z-index: 10;
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.4s;
+      pointer-events: none;
     }
-    .modal-close:hover {
-      border-color: var(--accent); color: var(--accent);
+    .herbarium-card:hover .card-play-btn {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
-    .modal-image {
-      background: linear-gradient(135deg, #F5F3EF 0%, #FAF8F5 100%);
-      display: flex; align-items: center; justify-content: center;
-      padding: 48px;
-      min-height: 400px;
+    .card-play-btn svg { width: 20px; height: 20px; color: var(--ink); }
+
+    /* ── About ── */
+    #about {
+      padding: 80px 48px;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
     }
-    .modal-image img {
-      max-width: 100%; max-height: 100%;
-      object-fit: contain;
+    #about h2 {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      margin-bottom: 32px;
+      color: var(--ink);
     }
-    .modal-info {
-      padding: 48px;
-      display: flex; flex-direction: column;
-    }
-    .modal-latin {
-      font-size: 14px; color: var(--ink-light);
-      margin-bottom: 4px;
-    }
-    .modal-handwritten {
-      font-size: 16px; color: var(--ink-muted);
-      margin-bottom: 24px;
-    }
-    .modal-title {
-      font-size: 32px; font-weight: 300;
-      color: var(--ink); margin-bottom: 8px;
-      letter-spacing: 0.08em;
-    }
-    .modal-season {
-      font-size: 12px; color: var(--green);
-      letter-spacing: 0.1em; margin-bottom: 32px;
-    }
-    .modal-desc {
-      font-size: 14px; color: var(--ink-light);
-      line-height: 2; margin-bottom: 32px;
-    }
-    .modal-meta {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin-bottom: 32px;
-    }
-    .meta-item {
-      padding: 16px;
-      background: var(--paper-dark);
-      border-radius: 2px;
-    }
-    .meta-item .label {
-      font-size: 11px; color: var(--ink-muted);
-      letter-spacing: 0.08em; margin-bottom: 4px;
-    }
-    .meta-item .value {
-      font-size: 14px; color: var(--ink);
-    }
-    .music-section {
-      margin-top: auto;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-    .music-section .label {
-      font-size: 11px; color: var(--ink-muted);
-      letter-spacing: 0.1em; margin-bottom: 16px;
-    }
-    .music-player {
-      display: flex; align-items: center; gap: 16px;
-      padding: 16px 20px;
-      background: var(--paper-dark);
-      border-radius: 4px;
-    }
-    .music-play-btn {
-      width: 48px; height: 48px;
-      background: var(--accent); color: white;
-      border: none; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; cursor: pointer;
-      transition: all 0.2s;
-    }
-    .music-play-btn:hover {
-      background: var(--ink);
-      transform: scale(1.05);
-    }
-    .music-info {
-      flex: 1;
-    }
-    .music-title {
-      font-size: 14px; color: var(--ink);
-      margin-bottom: 4px;
-    }
-    .music-artist {
-      font-size: 12px; color: var(--ink-muted);
-    }
-    .music-wave {
-      display: flex; gap: 3px; align-items: flex-end;
-      height: 24px;
-    }
-    .wave-bar {
-      width: 3px; background: var(--accent-light);
-      border-radius: 2px;
-      animation: wave 1s ease-in-out infinite;
-    }
-    .wave-bar:nth-child(1) { animation-delay: 0s; height: 8px; }
-    .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 16px; }
-    .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 12px; }
-    .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 20px; }
-    .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 10px; }
-    @keyframes wave {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    #about p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-light);
+      line-height: 2;
+      letter-spacing: 0.05em;
     }
 
     /* ── Footer ── */
     footer {
-      background: var(--paper-dark);
-      padding: 64px 48px 32px;
+      text-align: center;
+      padding: 48px 24px;
       border-top: 1px solid var(--border);
-    }
-    .footer-content {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 64px;
-    }
-    .footer-brand h3 {
-      font-size: 18px; font-weight: 400;
-      color: var(--ink); margin-bottom: 12px;
+      font-size: 11px;
+      color: var(--ink-muted);
       letter-spacing: 0.08em;
     }
-    .footer-brand p {
-      font-size: 13px; color: var(--ink-muted);
-      line-height: 1.9;
+    footer a { color: var(--ink-muted); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(253,252,250,0.96);
+      backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
     }
-    .footer-links h4 {
-      font-size: 11px; letter-spacing: 0.12em;
-      color: var(--ink-light); margin-bottom: 16px;
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--paper);
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      position: relative;
     }
-    .footer-links ul { list-style: none; }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links a {
-      font-size: 13px; color: var(--ink-muted);
-      text-decoration: none; transition: color 0.2s;
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; z-index: 10;
+      width: 36px; height: 36px;
+      background: var(--paper-dark);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      color: var(--ink-muted);
+      transition: background 0.2s;
     }
-    .footer-links a:hover { color: var(--ink); }
-    .footer-bottom {
-      max-width: 1200px; margin: 48px auto 0;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between;
-      font-size: 12px; color: var(--ink-muted);
+    .modal-close:hover { background: var(--border); }
+    .modal-img-wrap {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+    }
+    .modal-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .modal-body { padding: 32px; }
+    .modal-flower-name {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .modal-latin {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+    .modal-meta {
+      display: flex; gap: 16px; margin-bottom: 24px;
+    }
+    .modal-meta span {
+      font-size: 11px;
+      color: var(--ink-light);
+      letter-spacing: 0.08em;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+    .modal-divider {
+      width: 40px; height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+    .modal-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-light);
+      line-height: 2;
+      margin-bottom: 32px;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 24px; }
-      nav .nav-links { display: none; }
-      .herbarium { padding: 48px 24px 80px; }
-      .plant-grid { grid-template-columns: 1fr; gap: 32px; }
-      .modal-content { grid-template-columns: 1fr; }
-      .modal-image { min-height: 280px; padding: 32px; }
-      .modal-info { padding: 32px; }
-      .footer-content { grid-template-columns: 1fr; gap: 32px; }
+    /* ── Audio Player ── */
+    .audio-player {
+      background: var(--paper-dark);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 4px;
     }
+    .audio-player-header {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .audio-player-title {
+      font-size: 13px;
+      color: var(--ink-light);
+      letter-spacing: 0.05em;
+    }
+    .audio-waveform {
+      display: flex; align-items: center;
+      gap: 2px; height: 32px;
+      margin-bottom: 16px;
+    }
+    .waveform-bar {
+      flex: 1;
+      background: var(--border);
+      border-radius: 2px;
+      transition: background 0.2s;
+      min-height: 4px;
+    }
+    .waveform-bar.active { background: var(--accent); }
+    .audio-controls {
+      display: flex; align-items: center;
+      gap: 16px;
+    }
+    .play-btn {
+      width: 48px; height: 48px;
+      background: var(--ink);
+      border: none; border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.1s;
+      flex-shrink: 0;
+    }
+    .play-btn:hover { background: var(--ink-light); }
+    .play-btn:active { transform: scale(0.96); }
+    .play-btn svg { width: 18px; height: 18px; color: white; }
+    .audio-info { flex: 1; }
+    .audio-track-name {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: 0.05em;
+    }
+    .audio-composer {
+      font-size: 11px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+    .audio-time {
+      font-size: 12px;
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Sound hint ── */
+    .sound-hint {
+      font-size: 11px;
+      color: var(--ink-muted);
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      nav ul { gap: 20px; }
+      #herbarium { padding: 60px 20px 80px; }
+      .herbarium-grid { grid-template-columns: 1fr; gap: 2px; }
+      .herbarium-card { aspect-ratio: 4/3; }
+      #about { padding: 60px 24px; }
+      .hero h1 { font-size: 28px; }
+      .modal-img-wrap { height: 220px; }
+      .modal-body { padding: 24px; }
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--ink);
+      color: white;
+      font-size: 12px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      z-index: 9999;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+      letter-spacing: 0.05em;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
   </style>
-<script>var _hmt = _hmt || [];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?b8c13e514fa7250d72a0774656413f0c";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();</script>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- Nav -->
 <nav>
-  <div class="logo">花叙</div>
-  <ul class="nav-links">
+  <div class="brand">花 叙</div>
+  <ul>
     <li><a href="#herbarium">图鉴</a></li>
     <li><a href="#about">关于</a></li>
     <li><a href="contact.html">联系</a></li>
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- Hero -->
 <section class="hero">
-  <span class="hero-badge">Herbarium Musica · 植物音乐图鉴</span>
-  <h1>花叙</h1>
-  <p class="subtitle">Flora Sonata Collection</p>
-  <p class="hero-desc">
-    以植物志的方式记录花朵，<br>
-    每一朵花都藏着一首专属旋律。<br>
-    点击图鉴，聆听花的私语。
-  </p>
-  <div class="scroll-hint">
-    <span>↓</span>
-    <span>向下探索</span>
-  </div>
+  <div class="hero-badge">植物音乐图鉴</div>
+  <h1>花 叙</h1>
+  <p class="subtitle">一花一世界 · 一曲一浮生</p>
+  <div class="hero-ornament"></div>
+  <div class="scroll-hint">向下探索 ↓</div>
 </section>
 
-<!-- ── HERBARIUM GRID ── -->
-<section class="herbarium" id="herbarium">
-  <div class="herbarium-header">
-    <span class="section-label">Collection · 2026</span>
-    <h2>植物音乐图鉴</h2>
+<!-- Herbarium Grid -->
+<section id="herbarium">
+  <div class="section-title">
+    <h2>图鉴</h2>
+    <p>选择一朵花，聆听它的声音</p>
   </div>
-
-  <div class="plant-grid">
-    <!-- Lotus -->
-    <div class="plant-card" onclick="openModal('lotus')">
-      <div class="latin-name latin">Nelumbo nucifera Gaertn.</div>
-      <div class="handwritten-name handwritten">( Nelumbo nucifera )</div>
-      <div class="plant-illustration">
-        <img src="images/hehua-card.jpg" alt="荷花">
-        <div class="play-overlay">
-          <div class="play-btn">▶</div>
-          <span class="play-text">点击聆听</span>
-        </div>
-      </div>
-      <div class="plant-info">
-        <div class="cn-name">荷 · Lotus</div>
-        <div class="season">夏季 · Summer</div>
-        <div class="tags">
-          <span class="tag">禅意</span>
-          <span class="tag">古琴</span>
-          <span class="tag">电子</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Osmanthus -->
-    <div class="plant-card" onclick="openModal('osmanthus')">
-      <div class="latin-name latin">Osmanthus fragrans Lour.</div>
-      <div class="handwritten-name handwritten">( Osmanthus fragrans )</div>
-      <div class="plant-illustration">
-        <img src="images/guihua-card.jpg" alt="桂花">
-        <div class="play-overlay">
-          <div class="play-btn">▶</div>
-          <span class="play-text">点击聆听</span>
-        </div>
-      </div>
-      <div class="plant-info">
-        <div class="cn-name">桂 · Osmanthus</div>
-        <div class="season">秋季 · Autumn</div>
-        <div class="tags">
-          <span class="tag">温柔</span>
-          <span class="tag">钢琴</span>
-          <span class="tag">民谣</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Plum -->
-    <div class="plant-card" onclick="openModal('plum')">
-      <div class="latin-name latin">Prunus mume Sieb. et Zucc.</div>
-      <div class="handwritten-name handwritten">( Prunus mume )</div>
-      <div class="plant-illustration">
-        <img src="images/meihua-card.jpg" alt="梅花">
-        <div class="play-overlay">
-          <div class="play-btn">▶</div>
-          <span class="play-text">点击聆听</span>
-        </div>
-      </div>
-      <div class="plant-info">
-        <div class="cn-name">梅 · Plum</div>
-        <div class="season">冬季 · Winter</div>
-        <div class="tags">
-          <span class="tag">傲骨</span>
-          <span class="tag">笛子</span>
-          <span class="tag">弦乐</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Peony (Coming Soon) -->
-    <div class="plant-card" style="opacity:0.5; cursor:default;">
-      <div class="latin-name latin">Paeonia suffruticosa Andr.</div>
-      <div class="handwritten-name handwritten">( Paeonia suffruticosa )</div>
-      <div class="plant-illustration" style="background:#F0EEEA;">
-        <div style="font-size:48px;opacity:0.3;">🌺</div>
-      </div>
-      <div class="plant-info">
-        <div class="cn-name">牡丹 · Peony</div>
-        <div class="season">春季 · Spring</div>
-        <div class="tags">
-          <span class="tag">即将推出</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="herbarium-grid" id="herbariumGrid"></div>
 </section>
 
-<!-- ── MODAL ── -->
-<div class="modal-overlay" id="modal" onclick="closeModal(event)">
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-image">
+<!-- About -->
+<section id="about">
+  <h2>关于「花叙」</h2>
+  <p>每一朵花都有自己的性格与旋律。<br>当目光落在花瓣上，音乐便从心底响起。</p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 Panchi · 植物音乐图鉴</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img-wrap">
       <img id="modal-img" src="" alt="">
     </div>
-    <div class="modal-info">
-      <div class="modal-latin latin" id="modal-latin"></div>
-      <div class="modal-handwritten handwritten" id="modal-handwritten"></div>
-      <h2 class="modal-title" id="modal-title"></h2>
-      <div class="modal-season" id="modal-season"></div>
+    <div class="modal-body">
+      <div class="modal-flower-name" id="modal-name"></div>
+      <div class="modal-latin" id="modal-latin"></div>
+      <div class="modal-meta" id="modal-meta"></div>
+      <div class="modal-divider"></div>
       <p class="modal-desc" id="modal-desc"></p>
-      <div class="modal-meta">
-        <div class="meta-item">
-          <div class="label">花语</div>
-          <div class="value" id="modal-meaning"></div>
+
+      <!-- Audio Player -->
+      <div class="audio-player">
+        <div class="audio-player-header">
+          <span class="audio-player-title">专属花曲</span>
         </div>
-        <div class="meta-item">
-          <div class="label">花期</div>
-          <div class="value" id="modal-bloom"></div>
+        <div class="audio-waveform" id="waveform"></div>
+        <div class="audio-controls">
+          <button class="play-btn" id="playBtn" aria-label="播放">
+            <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+          <div class="audio-info">
+            <div class="audio-track-name" id="trackName"></div>
+            <div class="audio-composer" id="trackComposer"></div>
+          </div>
+          <div class="audio-time" id="audioTime">0:00</div>
         </div>
       </div>
-      <div class="music-section">
-        <div class="label">专属音乐 · EXCLUSIVE TRACK</div>
-        <div class="music-player">
-          <button class="music-play-btn" id="playBtn" onclick="togglePlay()">▶</button>
-          <div class="music-info">
-            <div class="music-title" id="music-title"></div>
-            <div class="music-artist" id="music-artist"></div>
-          </div>
-          <div class="music-wave" id="waveform">
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-          </div>
-        </div>
-      </div>
+      <p class="sound-hint" id="soundHint">点击播放按钮，聆听专属花曲</p>
     </div>
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-brand">
-      <h3>花叙</h3>
-      <p>以植物志的方式记录花朵，<br>每一朵花都藏着一首专属旋律。<br>每一次聆听，都是一场小型的心灵仪式。</p>
-    </div>
-    <div class="footer-links">
-      <h4>图鉴</h4>
-      <ul>
-        <li><a href="#">荷 · Lotus</a></li>
-        <li><a href="#">桂 · Osmanthus</a></li>
-        <li><a href="#">梅 · Plum</a></li>
-      </ul>
-    </div>
-    <div class="footer-links">
-      <h4>关于</h4>
-      <ul>
-        <li><a href="#">品牌故事</a></li>
-        <li><a href="#">聆听指南</a></li>
-        <li><a href="contact.html">联系我们</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 花叙 · panchiart.com</span>
-    <span>Herbarium Musica Collection</span>
-  </div>
-</footer>
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
 <script>
-const plantData = {
-  lotus: {
-    latin: 'Nelumbo nucifera Gaertn.',
-    handwritten: '( Nelumbo nucifera )',
-    title: '荷 · Lotus',
-    season: '夏季 · SUMMER',
-    desc: '出淤泥而不染，濯清涟而不妖。荷花承载着东方文化中对纯洁与超脱的向往。古琴与氛围电子交织的旋律将带你进入一片宁静的荷塘。',
-    meaning: '纯洁、坚贞、超脱',
-    bloom: '6月 - 8月',
-    image: 'images/hehua-modal.jpg',
-    music: '荷塘月色 · Lotus Pond',
-    artist: '古琴 × 氛围电子'
+// ─────────────────────────────────────────────
+// Flower Data
+// ─────────────────────────────────────────────
+const flowers = [
+  {
+    id: 'lotus',
+    name: '荷',
+    latin: 'Nelumbo nucifera',
+    nameFull: '荷花',
+    seasons: ['夏季', '花期6-9月'],
+    tags: ['清雅', '禅意'],
+    image: 'images/hehua-card.jpg', modalImage: 'images/hehua-modal.jpg',
+    desc: '出淤泥而不染，濯清涟而不妖。荷花承载着东方文化中对纯洁与超脱的向往，古琴与水声交织的旋律将带你进入一片宁静的荷塘。',
+    trackName: '荷塘月色',
+    trackComposer: 'AI 氛围生成',
+    mood: 'lotus'
   },
-  osmanthus: {
-    latin: 'Osmanthus fragrans Lour.',
-    handwritten: '( Osmanthus fragrans )',
-    title: '桂 · Osmanthus',
-    season: '秋季 · AUTUMN',
-    desc: '桂子月中落，天香云外飘。桂花的香气是中国人关于秋天最温柔的集体记忆。轻钢琴与民谣吉他的组合，让这首曲子像一杯温热的桂花酿，抚慰都市疲惫的心。',
-    meaning: '温柔、团圆、思念',
-    bloom: '9月 - 10月',
-    image: 'images/guihua-modal.jpg',
-    music: '桂香满庭 · Golden Rain',
-    artist: '轻钢琴 × 民谣吉他'
+  {
+    id: 'osmanthus',
+    name: '桂',
+    latin: 'Osmanthus fragrans',
+    nameFull: '桂花',
+    seasons: ['秋季', '花期9-10月'],
+    tags: ['温柔', '团圆'],
+    image: 'images/guihua-card.jpg', modalImage: 'images/guihua-modal.jpg',
+    desc: '桂香浮动，秋意渐浓。桂花是中国传统十大名花之一，花香清可绝尘，浓能远溢。如风铃轻摇，五声音阶诉说着金秋的故事。',
+    trackName: '金桂飘香',
+    trackComposer: 'AI 氛围生成',
+    mood: 'osmanthus'
   },
-  plum: {
-    latin: 'Prunus mume Sieb. et Zucc.',
-    handwritten: '( Prunus mume )',
-    title: '梅 · Plum',
-    season: '冬季 · WINTER',
-    desc: '墙角数枝梅，凌寒独自开。梅花是寒冬中最倔强的生命宣言。笛子与弦乐四重奏的对话，既有东方的空灵，又有西方的庄重，恰如梅花在冰雪中绽放的姿态。',
-    meaning: '傲骨、坚韧、希望',
-    bloom: '1月 - 3月',
-    image: 'images/meihua-modal.jpg',
-    music: '凌寒独放 · Winter Bloom',
-    artist: '笛子 × 弦乐四重奏'
+  {
+    id: 'plum',
+    name: '梅',
+    latin: 'Prunus mume',
+    nameFull: '梅花',
+    seasons: ['冬季', '花期1-3月'],
+    tags: ['傲骨', '坚韧'],
+    image: 'images/meihua-card.jpg', modalImage: 'images/meihua-modal.jpg',
+    desc: '墙角数枝梅，临寒独自开。梅花是中国十大名花之首，以清癯见长，象征着坚韧与高洁。竹笛的悠扬将冬日的静谧缓缓吹来。',
+    trackName: '寒梅傲雪',
+    trackComposer: 'AI 氛围生成',
+    mood: 'plum'
   }
-};
+];
 
-let isPlaying = false;
-
-function openModal(plant) {
-  const data = plantData[plant];
-  if (!data) return;
-  
-  document.getElementById('modal-img').src = data.image;
-  document.getElementById('modal-latin').textContent = data.latin;
-  document.getElementById('modal-handwritten').textContent = data.handwritten;
-  document.getElementById('modal-title').textContent = data.title;
-  document.getElementById('modal-season').textContent = data.season;
-  document.getElementById('modal-desc').textContent = data.desc;
-  document.getElementById('modal-meaning').textContent = data.meaning;
-  document.getElementById('modal-bloom').textContent = data.bloom;
-  document.getElementById('music-title').textContent = data.music;
-  document.getElementById('music-artist').textContent = data.artist;
-  
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(e) {
-  if (e && e.target !== e.currentTarget) return;
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow = '';
-  isPlaying = false;
-  document.getElementById('playBtn').textContent = '▶';
-  document.getElementById('waveform').style.opacity = '0.3';
-}
-
-function togglePlay() {
-  isPlaying = !isPlaying;
-  document.getElementById('playBtn').textContent = isPlaying ? '⏸' : '▶';
-  document.getElementById('waveform').style.opacity = isPlaying ? '1' : '0.3';
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
+// ─────────────────────────────────────────────
+// Build Grid
+// ─────────────────────────────────────────────
+const grid = document.getElementById('herbariumGrid');
+flowers.forEach(f => {
+  const card = document.createElement('div');
+  card.className = 'herbarium-card';
+  card.innerHTML = `
+    <img src="${f.image}" alt="${f.nameFull}" loading="lazy">
+    <div class="card-overlay">
+      <div class="card-name">${f.nameFull}</div>
+      <div class="card-latin">${f.latin}</div>
+      <div class="card-tag">${f.tags.join(' · ')} · 点击聆听</div>
+    </div>
+    <div class="card-play-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+  `;
+  card.addEventListener('click', () => openModal(f));
+  grid.appendChild(card);
 });
-</script>
 
+// ─────────────────────────────────────────────
+// Modal
+// ─────────────────────────────────────────────
+let currentMood = null;
+let audioCtx = null;
+let isPlaying = false;
+let stopFn = null;
+let animFrameId = null;
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+const trackName = document.getElementById('trackName');
+const trackComposer = document.getElementById('trackComposer');
+const audioTime = document.getElementById('audioTime');
+const waveform = document.getElementById('waveform');
+const soundHint = document.getElementById('soundHint');
+
+// Build waveform bars
+const BARS = 40;
+for (let i = 0; i < BARS; i++) {
+  const bar = document.createElement('div');
+  bar.className = 'waveform-bar';
+  bar.style.height = (Math.random() * 20 + 8) + 'px';
+  waveform.appendChild(bar);
+}
+
+function openModal(f) {
+  document.getElementById('modal-img').src = f.modalImage || f.image;
+  document.getElementById('modal-name').textContent = f.nameFull;
+  document.getElementById('modal-latin').textContent = f.latin;
+  document.getElementById('modal-meta').innerHTML =
+    f.seasons.map(s => `<span>${s}</span>`).join('') +
+    f.tags.map(t => `<span>${t}</span>`).join('');
+  document.getElementById('modal-desc').textContent = f.desc;
+  trackName.textContent = f.trackName;
+  trackComposer.textContent = f.trackComposer;
+
+  currentMood = f.mood;
+  isPlaying = false;
+  resetPlayBtn();
+  stopAudio();
+  resetWaveform();
+
+  modalOverlay.classList.add('open');
+  soundHint.textContent = '点击播放按钮，聆听专属花曲';
+}
+
+modalClose.addEventListener('click', () => {
+  modalOverlay.classList.remove('open');
+  stopAudio();
+  isPlaying = false;
+  resetPlayBtn();
+});
+
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) {
+    modalOverlay.classList.remove('open');
+    stopAudio();
+    isPlaying = false;
+    resetPlayBtn();
+  }
+});
+
+function resetPlayBtn() {
+  playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+}
+
+// ─────────────────────────────────────────────
+// Waveform Animation
+// ─────────────────────────────────────────────
+function resetWaveform() {
+  document.querySelectorAll('.waveform-bar').forEach(bar => {
+    bar.style.height = (Math.random() * 20 + 8) + 'px';
+    bar.classList.remove('active');
+  });
+}
+
+let waveActive = false;
+function animateWaveform() {
+  if (!waveActive) return;
+  const bars = document.querySelectorAll('.waveform-bar');
+  bars.forEach((bar, i) => {
+    const h = Math.abs(Math.sin(Date.now() / 300 + i * 0.4)) * 24 + 6;
+    bar.style.height = h + 'px';
+    bar.classList.add('active');
+  });
+  animFrameId = requestAnimationFrame(animateWaveform);
+}
+
+function stopWaveAnimation() {
+  waveActive = false;
+  cancelAnimationFrame(animFrameId);
+  document.querySelectorAll('.waveform-bar').forEach((bar, i) => {
+    bar.style.height = (Math.random() * 16 + 6) + 'px';
+    bar.classList.remove('active');
+  });
+}
+
+// ─────────────────────────────────────────────
+// Play Button
+// ─────────────────────────────────────────────
+playBtn.addEventListener('click', () => {
+  if (isPlaying) {
+    stopAudio();
+    isPlaying = false;
+    resetPlayBtn();
+    stopWaveAnimation();
+    soundHint.textContent = '点击播放按钮，重新聆听';
+  } else {
+    stopAudio();
+    startAudio(currentMood);
+    isPlaying = true;
+    playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    waveActive = true;
+    animateWaveform();
+    soundHint.textContent = '♪ 正在播放...';
+  }
+});
+
+// ─────────────────────────────────────────────
+// Web Audio API - Ambient Music Engine
+// ─────────────────────────────────────────────
+let masterGain = null;
+let startTime = 0;
+
+function stopAudio() {
+  if (stopFn) { stopFn(); stopFn = null; }
+  stopWaveAnimation();
+}
+
+function startAudio(mood) {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  // Master gain
+  masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 3);
+  masterGain.connect(audioCtx.destination);
+
+  startTime = audioCtx.currentTime;
+
+  if (mood === 'lotus') startLotusAudio();
+  else if (mood === 'osmanthus') startOsmanthusAudio();
+  else if (mood === 'plum') startPlumAudio();
+}
+
+function stopWithFade() {
+  if (masterGain) {
+    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
+    setTimeout(() => {
+      if (stopFn) stopFn = null;
+    }, 1600);
+  }
+}
+
+stopFn = stopWithFade;
+
+// ── Lotus: Guqin-inspired pentatonic ambient ──
+function startLotusAudio() {
+  const ctx = audioCtx;
+
+  // Pentatonic scale in D: D E F# A B
+  const freqs = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33, 659.25];
+  const reverb = createReverb(ctx, 4.5);
+
+  // Main drone layer
+  freqs.forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = 'sine';
+    osc.frequency.value = f;
+
+    filter.type = 'lowpass';
+    filter.frequency.value = 800 + i * 100;
+    filter.Q.value = 0.5;
+
+    g.gain.value = 0;
+    const vol = (0.18 - i * 0.015);
+    g.gain.linearRampToValueAtTime(vol, ctx.currentTime + 4 + i * 0.7);
+    g.gain.setValueAtTime(vol, ctx.currentTime + 8);
+    g.gain.linearRampToValueAtTime(vol * 0.7, ctx.currentTime + 16);
+
+    osc.connect(filter);
+    filter.connect(g);
+    g.connect(reverb);
+    reverb.connect(masterGain);
+    osc.start(ctx.currentTime + i * 0.5);
+    osc.stop(ctx.currentTime + 20);
+  });
+
+  // Water droplet layer
+  scheduleWaterDroplets(ctx, reverb);
+
+  // Slow LFO tremolo
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.3;
+  lfoGain.gain.value = 0.04;
+  lfo.connect(lfoGain);
+  lfoGain.connect(masterGain.gain);
+  lfo.start();
+
+  startTime = ctx.currentTime;
+}
+
+// ── Osmanthus: Wind chimes with pentatonic melody ──
+function startOsmanthusAudio() {
+  const ctx = audioCtx;
+  const reverb = createReverb(ctx, 3.5);
+
+  // Pentatonic in G: G A B D E
+  const chimeFreqs = [392.00, 440.00, 493.88, 587.33, 659.25, 783.99, 880.00];
+
+  // Sustained pad layer
+  chimeFreqs.slice(0, 4).forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.value = f;
+    g.gain.value = 0;
+    g.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 3 + i);
+    osc.connect(g);
+    g.connect(reverb);
+    reverb.connect(masterGain);
+    osc.start(ctx.currentTime + i * 0.8);
+    osc.stop(ctx.currentTime + 22);
+  });
+
+  // Wind chime arpeggio
+  scheduleChimeArpeggio(ctx, chimeFreqs, reverb);
+
+  // Gentle breeze noise
+  scheduleBreeze(ctx, reverb);
+
+  // Gentle LFO
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.25;
+  lfoGain.gain.value = 0.03;
+  lfo.connect(lfoGain);
+  lfoGain.connect(masterGain.gain);
+  lfo.start();
+
+  startTime = ctx.currentTime;
+}
+
+// ── Plum: Chinese bamboo flute ambient ──
+function startPlumAudio() {
+  const ctx = audioCtx;
+  const reverb = createReverb(ctx, 5.0);
+
+  // Pentatonic in C: C D E G A
+  const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33];
+
+  // Overtone-rich flute pad
+  scale.forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = 'sawtooth';
+    osc.frequency.value = f;
+
+    filter.type = 'bandpass';
+    filter.frequency.value = f * 2.5;
+    filter.Q.value = 3;
+
+    g.gain.value = 0;
+    const vol = (0.06 - i * 0.005);
+    g.gain.linearRampToValueAtTime(Math.max(0, vol), ctx.currentTime + 3 + i * 0.6);
+    g.gain.setValueAtTime(Math.max(0, vol * 0.6), ctx.currentTime + 12);
+
+    osc.connect(filter);
+    filter.connect(g);
+    g.connect(reverb);
+    reverb.connect(masterGain);
+    osc.start(ctx.currentTime + i * 0.6);
+    osc.stop(ctx.currentTime + 18);
+  });
+
+  // Flute melody phrases
+  scheduleFlutePhrases(ctx, scale, reverb);
+
+  // Wind noise in background
+  scheduleWinterWind(ctx, reverb);
+
+  // Slow breathing LFO
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.15;
+  lfoGain.gain.value = 0.04;
+  lfo.connect(lfoGain);
+  lfoGain.connect(masterGain.gain);
+  lfo.start();
+
+  startTime = ctx.currentTime;
+}
+
+// ─────────────────────────────────────────────
+// Audio Helpers
+// ─────────────────────────────────────────────
+function createReverb(ctx, duration = 3) {
+  const convolver = ctx.createConvolver();
+  const rate = ctx.sampleRate;
+  const length = rate * duration;
+  const impulse = ctx.createBuffer(2, length, rate);
+  for (let c = 0; c < 2; c++) {
+    const ch = impulse.getChannelData(c);
+    for (let i = 0; i < length; i++) {
+      ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.5);
+    }
+  }
+  convolver.buffer = impulse;
+  return convolver;
+}
+
+function scheduleWaterDroplets(ctx, dest) {
+  const scheduleDrop = () => {
+    if (!stopFn) return;
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    const freq = 600 + Math.random() * 1200;
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.3, ctx.currentTime + 0.4);
+
+    g.gain.setValueAtTime(0, ctx.currentTime);
+    g.gain.linearRampToValueAtTime(0.06 + Math.random() * 0.05, ctx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+
+    osc.connect(g);
+    g.connect(dest);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.6);
+
+    setTimeout(scheduleDrop, 400 + Math.random() * 2000);
+  };
+  scheduleDrop();
+}
+
+function scheduleChimeArpeggio(ctx, freqs, dest) {
+  const playNote = (f, t) => {
+    if (!stopFn) return;
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = 'sine';
+    osc.frequency.value = f;
+
+    filter.type = 'highpass';
+    filter.frequency.value = 300;
+
+    const vol = 0.12 + Math.random() * 0.06;
+    g.gain.setValueAtTime(vol, ctx.currentTime + t);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 2.5);
+
+    osc.connect(filter);
+    filter.connect(g);
+    g.connect(dest);
+    osc.start(ctx.currentTime + t);
+    osc.stop(ctx.currentTime + t + 3);
+
+    // Harmonics
+    [2, 3].forEach(h => {
+      const osc2 = ctx.createOscillator();
+      const g2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.value = f * h;
+      g2.gain.setValueAtTime(vol * 0.15, ctx.currentTime + t);
+      g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 1.5);
+      osc2.connect(g2);
+      g2.connect(dest);
+      osc2.start(ctx.currentTime + t);
+      osc2.stop(ctx.currentTime + t + 2);
+    });
+  };
+
+  const melody = [0, 2, 4, 2, 5, 4, 2, 0];
+  const schedule = () => {
+    if (!stopFn) return;
+    melody.forEach((idx, i) => {
+      playNote(freqs[idx % freqs.length], i * 0.5);
+    });
+    setTimeout(schedule, melody.length * 500 + 800);
+  };
+  setTimeout(schedule, 1500);
+}
+
+function scheduleBreeze(ctx, dest) {
+  const bufferSize = ctx.sampleRate * 2;
+  const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = noiseBuffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+  const noise = ctx.createBufferSource();
+  noise.buffer = noiseBuffer;
+  noise.loop = true;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 400;
+  filter.Q.value = 0.5;
+
+  const g = ctx.createGain();
+  g.gain.value = 0;
+
+  const now = ctx.currentTime;
+  g.gain.linearRampToValueAtTime(0.04, now + 5);
+  g.gain.linearRampToValueAtTime(0.02, now + 10);
+  g.gain.linearRampToValueAtTime(0.05, now + 15);
+
+  noise.connect(filter);
+  filter.connect(g);
+  g.connect(dest);
+  noise.start();
+}
+
+function scheduleFlutePhrases(ctx, scale, dest) {
+  // Pentatonic phrase patterns
+  const phrases = [
+    [0, 2, 4, 5, 4, 2, 0],
+    [4, 5, 6, 5, 4, 2, 0],
+    [0, 4, 5, 6, 5, 4, 2],
+    [2, 4, 5, 4, 2, 0]
+  ];
+
+  const playPhrase = (phrase, baseOctave = 0) => {
+    if (!stopFn) return;
+    const now = ctx.currentTime;
+    phrase.forEach((note, i) => {
+      const f = scale[note % scale.length];
+      const octF = f * Math.pow(2, baseOctave);
+
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      const vibrato = ctx.createOscillator();
+      const vibratoG = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.value = octF;
+
+      vibrato.type = 'sine';
+      vibrato.frequency.value = 5.5;
+      vibratoG.gain.value = 3;
+      vibrato.connect(vibratoG);
+      vibratoG.connect(osc.frequency);
+
+      const vol = 0.15;
+      const dur = 0.4 + Math.random() * 0.3;
+      g.gain.setValueAtTime(0, now + i * 0.55);
+      g.gain.linearRampToValueAtTime(vol, now + i * 0.55 + 0.05);
+      g.gain.setValueAtAtTime(vol * 0.6, now + i * 0.55 + dur * 0.5);
+      g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.55 + dur + 0.5);
+
+      osc.connect(g);
+      g.connect(dest);
+      vibrato.start(now + i * 0.55);
+      vibrato.stop(now + i * 0.55 + dur + 1);
+      osc.start(now + i * 0.55);
+      osc.stop(now + i * 0.55 + dur + 1);
+    });
+  };
+
+  const schedule = () => {
+    if (!stopFn) return;
+    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    playPhrase(phrase, Math.random() > 0.5 ? 1 : 0);
+    setTimeout(schedule, phrase.length * 550 + 600 + Math.random() * 2000);
+  };
+  setTimeout(schedule, 2000);
+}
+
+function scheduleWinterWind(ctx, dest) {
+  const bufferSize = ctx.sampleRate * 3;
+  const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = noiseBuffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+  const noise = ctx.createBufferSource();
+  noise.buffer = noiseBuffer;
+  noise.loop = true;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 250;
+  filter.Q.value = 1;
+
+  const g = ctx.createGain();
+  g.gain.value = 0;
+
+  const now = ctx.currentTime;
+  g.gain.linearRampToValueAtTime(0.025, now + 4);
+  g.gain.linearRampToValueAtTime(0.015, now + 12);
+
+  noise.connect(filter);
+  filter.connect(g);
+  g.connect(dest);
+  noise.start();
+}
+
+// ─────────────────────────────────────────────
+// NFC Auto-Play (via URL params)
+// ─────────────────────────────────────────────
+(function autoPlayFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const flowerParam = params.get('flower');
+  if (flowerParam) {
+    const f = flowers.find(f => f.id === flowerParam);
+    if (f) {
+      // Small delay to let page render
+      setTimeout(() => {
+        openModal(f);
+        // Auto-start audio after 1 second
+        setTimeout(() => {
+          stopAudio();
+          startAudio(f.mood);
+          isPlaying = true;
+          resetPlayBtn();
+          playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+          waveActive = true;
+          animateWaveform();
+          soundHint.textContent = '♪ 正在播放...';
+        }, 800);
+      }, 300);
+    }
+  }
+})();
+
+// ─────────────────────────────────────────────
+// Time Counter
+// ─────────────────────────────────────────────
+let timeInterval = null;
+const TIME_STEPS = [0, 22]; // seconds for demo loop
+
+function startTimeCounter() {
+  clearInterval(timeInterval);
+  let sec = 0;
+  timeInterval = setInterval(() => {
+    if (!isPlaying) { clearInterval(timeInterval); audioTime.textContent = '0:00'; return; }
+    sec = (sec + 1) % 23;
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    audioTime.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+  }, 1000);
+}
+
+// ─────────────────────────────────────────────
+// Toast
+// ─────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
 </body>
 </html>
