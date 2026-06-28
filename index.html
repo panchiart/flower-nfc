@@ -33,12 +33,6 @@
       font-weight: 300;
       letter-spacing: 0.02em;
     }
-    .handwritten {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 300;
-      opacity: 0.6;
-    }
 
     /* ── Nav ── */
     nav {
@@ -216,28 +210,6 @@
     }
     .card-play-btn svg { width: 20px; height: 20px; color: var(--ink); }
 
-    /* ── About ── */
-    #about {
-      padding: 80px 48px;
-      max-width: 640px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    #about h2 {
-      font-size: 18px;
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      margin-bottom: 32px;
-      color: var(--ink);
-    }
-    #about p {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--ink-light);
-      line-height: 2;
-      letter-spacing: 0.05em;
-    }
-
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -395,8 +367,6 @@
       font-variant-numeric: tabular-nums;
       letter-spacing: 0.05em;
     }
-
-    /* ── Sound hint ── */
     .sound-hint {
       font-size: 11px;
       color: var(--ink-muted);
@@ -412,27 +382,10 @@
       #herbarium { padding: 60px 20px 80px; }
       .herbarium-grid { grid-template-columns: 1fr; gap: 2px; }
       .herbarium-card { aspect-ratio: 4/3; }
-      #about { padding: 60px 24px; }
       .hero h1 { font-size: 28px; }
       .modal-img-wrap { height: 220px; }
       .modal-body { padding: 24px; }
     }
-
-    /* ── Toast ── */
-    .toast {
-      position: fixed; bottom: 24px; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--ink);
-      color: white;
-      font-size: 12px;
-      padding: 10px 20px;
-      border-radius: 20px;
-      z-index: 9999;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-      letter-spacing: 0.05em;
-    }
-    .toast.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -442,7 +395,6 @@
   <div class="brand">花 叙</div>
   <ul>
     <li><a href="#herbarium">图鉴</a></li>
-    <li><a href="#about">关于</a></li>
     <li><a href="contact.html">联系</a></li>
   </ul>
 </nav>
@@ -463,12 +415,6 @@
     <p>选择一朵花，聆听它的声音</p>
   </div>
   <div class="herbarium-grid" id="herbariumGrid"></div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <h2>关于「花叙」</h2>
-  <p>每一朵花都有自己的性格与旋律。<br>当目光落在花瓣上，音乐便从心底响起。</p>
 </section>
 
 <!-- Footer -->
@@ -514,8 +460,8 @@
   </div>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
+<!-- Baidu Analytics -->
+<script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?b8c13e514fa7250d72a0774656413f0c";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();</script>
 
 <script>
 // ─────────────────────────────────────────────
@@ -529,11 +475,11 @@ const flowers = [
     nameFull: '荷花',
     seasons: ['夏季', '花期6-9月'],
     tags: ['清雅', '禅意'],
-    image: 'images/hehua-card.jpg', modalImage: 'images/hehua-modal.jpg',
+    image: 'images/hehua-card.jpg',
+    modalImage: 'images/hehua-modal.jpg',
     desc: '出淤泥而不染，濯清涟而不妖。荷花承载着东方文化中对纯洁与超脱的向往，古琴与水声交织的旋律将带你进入一片宁静的荷塘。',
     trackName: '荷塘月色',
-    trackComposer: 'AI 氛围生成',
-    mood: 'lotus'
+    trackComposer: 'AI 氛围生成'
   },
   {
     id: 'osmanthus',
@@ -542,11 +488,11 @@ const flowers = [
     nameFull: '桂花',
     seasons: ['秋季', '花期9-10月'],
     tags: ['温柔', '团圆'],
-    image: 'images/guihua-card.jpg', modalImage: 'images/guihua-modal.jpg',
+    image: 'images/guihua-card.jpg',
+    modalImage: 'images/guihua-modal.jpg',
     desc: '桂香浮动，秋意渐浓。桂花是中国传统十大名花之一，花香清可绝尘，浓能远溢。如风铃轻摇，五声音阶诉说着金秋的故事。',
     trackName: '金桂飘香',
-    trackComposer: 'AI 氛围生成',
-    mood: 'osmanthus'
+    trackComposer: 'AI 氛围生成'
   },
   {
     id: 'plum',
@@ -555,11 +501,11 @@ const flowers = [
     nameFull: '梅花',
     seasons: ['冬季', '花期1-3月'],
     tags: ['傲骨', '坚韧'],
-    image: 'images/meihua-card.jpg', modalImage: 'images/meihua-modal.jpg',
+    image: 'images/meihua-card.jpg',
+    modalImage: 'images/meihua-modal.jpg',
     desc: '墙角数枝梅，临寒独自开。梅花是中国十大名花之首，以清癯见长，象征着坚韧与高洁。竹笛的悠扬将冬日的静谧缓缓吹来。',
     trackName: '寒梅傲雪',
-    trackComposer: 'AI 氛围生成',
-    mood: 'plum'
+    trackComposer: 'AI 氛围生成'
   }
 ];
 
@@ -588,20 +534,16 @@ flowers.forEach(f => {
 // ─────────────────────────────────────────────
 // Modal
 // ─────────────────────────────────────────────
-let currentMood = null;
-let audioCtx = null;
+let currentFlower = null;
 let isPlaying = false;
-let stopFn = null;
-let animFrameId = null;
+let audioCtx = null;
+let animationId = null;
+let activeOscillators = [];
 
 const modalOverlay = document.getElementById('modalOverlay');
 const modalClose = document.getElementById('modalClose');
 const playBtn = document.getElementById('playBtn');
 const playIcon = document.getElementById('playIcon');
-const trackName = document.getElementById('trackName');
-const trackComposer = document.getElementById('trackComposer');
-const audioTime = document.getElementById('audioTime');
-const waveform = document.getElementById('waveform');
 const soundHint = document.getElementById('soundHint');
 
 // Build waveform bars
@@ -614,6 +556,7 @@ for (let i = 0; i < BARS; i++) {
 }
 
 function openModal(f) {
+  currentFlower = f;
   document.getElementById('modal-img').src = f.modalImage || f.image;
   document.getElementById('modal-name').textContent = f.nameFull;
   document.getElementById('modal-latin').textContent = f.latin;
@@ -621,14 +564,12 @@ function openModal(f) {
     f.seasons.map(s => `<span>${s}</span>`).join('') +
     f.tags.map(t => `<span>${t}</span>`).join('');
   document.getElementById('modal-desc').textContent = f.desc;
-  trackName.textContent = f.trackName;
-  trackComposer.textContent = f.trackComposer;
+  document.getElementById('trackName').textContent = f.trackName;
+  document.getElementById('trackComposer').textContent = f.trackComposer;
 
-  currentMood = f.mood;
   isPlaying = false;
   resetPlayBtn();
-  stopAudio();
-  resetWaveform();
+  stopAllAudio();
 
   modalOverlay.classList.add('open');
   soundHint.textContent = '点击播放按钮，聆听专属花曲';
@@ -636,17 +577,13 @@ function openModal(f) {
 
 modalClose.addEventListener('click', () => {
   modalOverlay.classList.remove('open');
-  stopAudio();
-  isPlaying = false;
-  resetPlayBtn();
+  stopAllAudio();
 });
 
 modalOverlay.addEventListener('click', (e) => {
   if (e.target === modalOverlay) {
     modalOverlay.classList.remove('open');
-    stopAudio();
-    isPlaying = false;
-    resetPlayBtn();
+    stopAllAudio();
   }
 });
 
@@ -655,452 +592,257 @@ function resetPlayBtn() {
 }
 
 // ─────────────────────────────────────────────
-// Waveform Animation
-// ─────────────────────────────────────────────
-function resetWaveform() {
-  document.querySelectorAll('.waveform-bar').forEach(bar => {
-    bar.style.height = (Math.random() * 20 + 8) + 'px';
-    bar.classList.remove('active');
-  });
-}
-
-let waveActive = false;
-function animateWaveform() {
-  if (!waveActive) return;
-  const bars = document.querySelectorAll('.waveform-bar');
-  bars.forEach((bar, i) => {
-    const h = Math.abs(Math.sin(Date.now() / 300 + i * 0.4)) * 24 + 6;
-    bar.style.height = h + 'px';
-    bar.classList.add('active');
-  });
-  animFrameId = requestAnimationFrame(animateWaveform);
-}
-
-function stopWaveAnimation() {
-  waveActive = false;
-  cancelAnimationFrame(animFrameId);
-  document.querySelectorAll('.waveform-bar').forEach((bar, i) => {
-    bar.style.height = (Math.random() * 16 + 6) + 'px';
-    bar.classList.remove('active');
-  });
-}
-
-// ─────────────────────────────────────────────
-// Play Button
+// Play Button Click
 // ─────────────────────────────────────────────
 playBtn.addEventListener('click', () => {
   if (isPlaying) {
-    stopAudio();
+    stopAllAudio();
     isPlaying = false;
     resetPlayBtn();
-    stopWaveAnimation();
     soundHint.textContent = '点击播放按钮，重新聆听';
   } else {
-    stopAudio();
-    startAudio(currentMood);
+    stopAllAudio();
+    playFlowerAudio(currentFlower.id);
     isPlaying = true;
     playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-    waveActive = true;
-    animateWaveform();
+    startWaveAnimation();
     soundHint.textContent = '♪ 正在播放...';
   }
 });
 
 // ─────────────────────────────────────────────
-// Web Audio API - Ambient Music Engine
+// Web Audio Engine
 // ─────────────────────────────────────────────
-let masterGain = null;
-let startTime = 0;
-
-function stopAudio() {
-  if (stopFn) { stopFn(); stopFn = null; }
-  stopWaveAnimation();
+function stopAllAudio() {
+  cancelAnimationFrame(animationId);
+  activeOscillators.forEach(o => {
+    try { o.stop(); } catch(e) {}
+  });
+  activeOscillators = [];
+  if (audioCtx) {
+    try { audioCtx.close(); } catch(e) {}
+    audioCtx = null;
+  }
+  resetWaveform();
 }
 
-function startAudio(mood) {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function resetWaveform() {
+  document.querySelectorAll('.waveform-bar').forEach(bar => {
+    bar.style.height = (Math.random() * 16 + 6) + 'px';
+    bar.classList.remove('active');
+  });
+}
+
+function startWaveAnimation() {
+  const bars = document.querySelectorAll('.waveform-bar');
+  function animate() {
+    if (!isPlaying) return;
+    bars.forEach((bar, i) => {
+      const h = Math.abs(Math.sin(Date.now() / 300 + i * 0.3)) * 24 + 6;
+      bar.style.height = h + 'px';
+      bar.classList.add('active');
+    });
+    animationId = requestAnimationFrame(animate);
   }
+  animate();
+}
+
+// ─────────────────────────────────────────────
+// Flower-Specific Audio Generators
+// ─────────────────────────────────────────────
+function playFlowerAudio(flowerId) {
+  // Create fresh AudioContext
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  // Resume if suspended (iOS/Safari requirement)
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
 
-  // Master gain
-  masterGain = audioCtx.createGain();
+  const masterGain = audioCtx.createGain();
   masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 3);
+  masterGain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 2);
   masterGain.connect(audioCtx.destination);
 
-  startTime = audioCtx.currentTime;
+  console.log('🎵 Playing:', flowerId, '| State:', audioCtx.state);
 
-  if (mood === 'lotus') startLotusAudio();
-  else if (mood === 'osmanthus') startOsmanthusAudio();
-  else if (mood === 'plum') startPlumAudio();
-}
-
-function stopWithFade() {
-  if (masterGain) {
-    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
-    setTimeout(() => {
-      if (stopFn) stopFn = null;
-    }, 1600);
+  if (flowerId === 'lotus') {
+    playLotusMusic(masterGain);
+  } else if (flowerId === 'osmanthus') {
+    playOsmanthusMusic(masterGain);
+  } else if (flowerId === 'plum') {
+    playPlumMusic(masterGain);
   }
 }
 
-stopFn = stopWithFade;
-
-// ── Lotus: Guqin-inspired pentatonic ambient ──
-function startLotusAudio() {
-  const ctx = audioCtx;
-
-  // Pentatonic scale in D: D E F# A B
-  const freqs = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33, 659.25];
-  const reverb = createReverb(ctx, 4.5);
-
-  // Main drone layer
-  freqs.forEach((f, i) => {
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-
+// ── Lotus: Peaceful pentatonic drone with water droplets ──
+function playLotusMusic(dest) {
+  // Pentatonic D: D E F# A B
+  const scale = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33];
+  
+  // Main drone notes
+  scale.slice(0, 4).forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
     osc.type = 'sine';
-    osc.frequency.value = f;
-
-    filter.type = 'lowpass';
-    filter.frequency.value = 800 + i * 100;
-    filter.Q.value = 0.5;
-
-    g.gain.value = 0;
-    const vol = (0.18 - i * 0.015);
-    g.gain.linearRampToValueAtTime(vol, ctx.currentTime + 4 + i * 0.7);
-    g.gain.setValueAtTime(vol, ctx.currentTime + 8);
-    g.gain.linearRampToValueAtTime(vol * 0.7, ctx.currentTime + 16);
-
-    osc.connect(filter);
-    filter.connect(g);
-    g.connect(reverb);
-    reverb.connect(masterGain);
-    osc.start(ctx.currentTime + i * 0.5);
-    osc.stop(ctx.currentTime + 20);
+    osc.frequency.value = freq;
+    
+    gain.gain.setValueAtTime(0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.08 - i * 0.015, audioCtx.currentTime + 2);
+    
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 18);
+    activeOscillators.push(osc);
   });
 
-  // Water droplet layer
-  scheduleWaterDroplets(ctx, reverb);
+  // Water droplet sounds
+  const dropInterval = setInterval(() => {
+    if (!isPlaying || activeOscillators.length > 10) return;
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    const dropFreq = 600 + Math.random() * 800;
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(dropFreq, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(dropFreq * 0.4, audioCtx.currentTime + 0.3);
+    
+    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+    
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.5);
+  }, 600);
 
-  // Slow LFO tremolo
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.type = 'sine';
-  lfo.frequency.value = 0.3;
-  lfoGain.gain.value = 0.04;
-  lfo.connect(lfoGain);
-  lfoGain.connect(masterGain.gain);
-  lfo.start();
-
-  startTime = ctx.currentTime;
+  setTimeout(() => clearInterval(dropInterval), 16000);
 }
 
-// ── Osmanthus: Wind chimes with pentatonic melody ──
-function startOsmanthusAudio() {
-  const ctx = audioCtx;
-  const reverb = createReverb(ctx, 3.5);
-
-  // Pentatonic in G: G A B D E
-  const chimeFreqs = [392.00, 440.00, 493.88, 587.33, 659.25, 783.99, 880.00];
-
-  // Sustained pad layer
-  chimeFreqs.slice(0, 4).forEach((f, i) => {
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
+// ── Osmanthus: Wind chimes with gentle pentatonic melody ──
+function playOsmanthusMusic(dest) {
+  // Pentatonic G: G A B D E
+  const scale = [392.00, 440.00, 493.88, 587.33, 659.25, 783.99];
+  
+  // Pad layer
+  scale.slice(0, 3).forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
     osc.type = 'triangle';
-    osc.frequency.value = f;
-    g.gain.value = 0;
-    g.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 3 + i);
-    osc.connect(g);
-    g.connect(reverb);
-    reverb.connect(masterGain);
-    osc.start(ctx.currentTime + i * 0.8);
-    osc.stop(ctx.currentTime + 22);
+    osc.frequency.value = freq;
+    
+    gain.gain.setValueAtTime(0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 2 + i * 0.5);
+    
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 20);
+    activeOscillators.push(osc);
   });
 
-  // Wind chime arpeggio
-  scheduleChimeArpeggio(ctx, chimeFreqs, reverb);
+  // Chime arpeggio
+  let noteIndex = 0;
+  const chimeInterval = setInterval(() => {
+    if (!isPlaying) return;
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    const freq = scale[noteIndex % scale.length];
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.5);
+    
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 2);
+    
+    noteIndex++;
+  }, 500);
 
-  // Gentle breeze noise
-  scheduleBreeze(ctx, reverb);
-
-  // Gentle LFO
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.type = 'sine';
-  lfo.frequency.value = 0.25;
-  lfoGain.gain.value = 0.03;
-  lfo.connect(lfoGain);
-  lfoGain.connect(masterGain.gain);
-  lfo.start();
-
-  startTime = ctx.currentTime;
+  setTimeout(() => clearInterval(chimeInterval), 18000);
 }
 
-// ── Plum: Chinese bamboo flute ambient ──
-function startPlumAudio() {
-  const ctx = audioCtx;
-  const reverb = createReverb(ctx, 5.0);
-
-  // Pentatonic in C: C D E G A
-  const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33];
-
-  // Overtone-rich flute pad
-  scale.forEach((f, i) => {
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-
+// ── Plum: Bamboo flute with winter atmosphere ──
+function playPlumMusic(dest) {
+  // Pentatonic C: C D E G A
+  const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
+  
+  // Low pad drone
+  scale.slice(0, 3).forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+    
     osc.type = 'sawtooth';
-    osc.frequency.value = f;
-
-    filter.type = 'bandpass';
-    filter.frequency.value = f * 2.5;
-    filter.Q.value = 3;
-
-    g.gain.value = 0;
-    const vol = (0.06 - i * 0.005);
-    g.gain.linearRampToValueAtTime(Math.max(0, vol), ctx.currentTime + 3 + i * 0.6);
-    g.gain.setValueAtTime(Math.max(0, vol * 0.6), ctx.currentTime + 12);
-
+    osc.frequency.value = freq;
+    
+    filter.type = 'lowpass';
+    filter.frequency.value = 600;
+    
+    gain.gain.setValueAtTime(0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 3);
+    
     osc.connect(filter);
-    filter.connect(g);
-    g.connect(reverb);
-    reverb.connect(masterGain);
-    osc.start(ctx.currentTime + i * 0.6);
-    osc.stop(ctx.currentTime + 18);
+    filter.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 16);
+    activeOscillators.push(osc);
   });
 
   // Flute melody phrases
-  scheduleFlutePhrases(ctx, scale, reverb);
-
-  // Wind noise in background
-  scheduleWinterWind(ctx, reverb);
-
-  // Slow breathing LFO
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.type = 'sine';
-  lfo.frequency.value = 0.15;
-  lfoGain.gain.value = 0.04;
-  lfo.connect(lfoGain);
-  lfoGain.connect(masterGain.gain);
-  lfo.start();
-
-  startTime = ctx.currentTime;
-}
-
-// ─────────────────────────────────────────────
-// Audio Helpers
-// ─────────────────────────────────────────────
-function createReverb(ctx, duration = 3) {
-  const convolver = ctx.createConvolver();
-  const rate = ctx.sampleRate;
-  const length = rate * duration;
-  const impulse = ctx.createBuffer(2, length, rate);
-  for (let c = 0; c < 2; c++) {
-    const ch = impulse.getChannelData(c);
-    for (let i = 0; i < length; i++) {
-      ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.5);
-    }
-  }
-  convolver.buffer = impulse;
-  return convolver;
-}
-
-function scheduleWaterDroplets(ctx, dest) {
-  const scheduleDrop = () => {
-    if (!stopFn) return;
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    const freq = 600 + Math.random() * 1200;
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(freq * 0.3, ctx.currentTime + 0.4);
-
-    g.gain.setValueAtTime(0, ctx.currentTime);
-    g.gain.linearRampToValueAtTime(0.06 + Math.random() * 0.05, ctx.currentTime + 0.01);
-    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
-
-    osc.connect(g);
-    g.connect(dest);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 0.6);
-
-    setTimeout(scheduleDrop, 400 + Math.random() * 2000);
-  };
-  scheduleDrop();
-}
-
-function scheduleChimeArpeggio(ctx, freqs, dest) {
-  const playNote = (f, t) => {
-    if (!stopFn) return;
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-
-    osc.type = 'sine';
-    osc.frequency.value = f;
-
-    filter.type = 'highpass';
-    filter.frequency.value = 300;
-
-    const vol = 0.12 + Math.random() * 0.06;
-    g.gain.setValueAtTime(vol, ctx.currentTime + t);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 2.5);
-
-    osc.connect(filter);
-    filter.connect(g);
-    g.connect(dest);
-    osc.start(ctx.currentTime + t);
-    osc.stop(ctx.currentTime + t + 3);
-
-    // Harmonics
-    [2, 3].forEach(h => {
-      const osc2 = ctx.createOscillator();
-      const g2 = ctx.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.value = f * h;
-      g2.gain.setValueAtTime(vol * 0.15, ctx.currentTime + t);
-      g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 1.5);
-      osc2.connect(g2);
-      g2.connect(dest);
-      osc2.start(ctx.currentTime + t);
-      osc2.stop(ctx.currentTime + t + 2);
-    });
-  };
-
-  const melody = [0, 2, 4, 2, 5, 4, 2, 0];
-  const schedule = () => {
-    if (!stopFn) return;
-    melody.forEach((idx, i) => {
-      playNote(freqs[idx % freqs.length], i * 0.5);
-    });
-    setTimeout(schedule, melody.length * 500 + 800);
-  };
-  setTimeout(schedule, 1500);
-}
-
-function scheduleBreeze(ctx, dest) {
-  const bufferSize = ctx.sampleRate * 2;
-  const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-  const data = noiseBuffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-  const noise = ctx.createBufferSource();
-  noise.buffer = noiseBuffer;
-  noise.loop = true;
-
-  const filter = ctx.createBiquadFilter();
-  filter.type = 'bandpass';
-  filter.frequency.value = 400;
-  filter.Q.value = 0.5;
-
-  const g = ctx.createGain();
-  g.gain.value = 0;
-
-  const now = ctx.currentTime;
-  g.gain.linearRampToValueAtTime(0.04, now + 5);
-  g.gain.linearRampToValueAtTime(0.02, now + 10);
-  g.gain.linearRampToValueAtTime(0.05, now + 15);
-
-  noise.connect(filter);
-  filter.connect(g);
-  g.connect(dest);
-  noise.start();
-}
-
-function scheduleFlutePhrases(ctx, scale, dest) {
-  // Pentatonic phrase patterns
-  const phrases = [
-    [0, 2, 4, 5, 4, 2, 0],
-    [4, 5, 6, 5, 4, 2, 0],
-    [0, 4, 5, 6, 5, 4, 2],
-    [2, 4, 5, 4, 2, 0]
-  ];
-
-  const playPhrase = (phrase, baseOctave = 0) => {
-    if (!stopFn) return;
-    const now = ctx.currentTime;
-    phrase.forEach((note, i) => {
-      const f = scale[note % scale.length];
-      const octF = f * Math.pow(2, baseOctave);
-
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      const vibrato = ctx.createOscillator();
-      const vibratoG = ctx.createGain();
-
+  let phraseIndex = 0;
+  const phrases = [[0, 2, 4, 5], [4, 3, 2, 0], [2, 4, 5, 4]];
+  
+  const melodyInterval = setInterval(() => {
+    if (!isPlaying) return;
+    
+    const phrase = phrases[phraseIndex % phrases.length];
+    phrase.forEach((noteIdx, i) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
       osc.type = 'triangle';
-      osc.frequency.value = octF;
-
-      vibrato.type = 'sine';
-      vibrato.frequency.value = 5.5;
-      vibratoG.gain.value = 3;
-      vibrato.connect(vibratoG);
-      vibratoG.connect(osc.frequency);
-
-      const vol = 0.15;
-      const dur = 0.4 + Math.random() * 0.3;
-      g.gain.setValueAtTime(0, now + i * 0.55);
-      g.gain.linearRampToValueAtTime(vol, now + i * 0.55 + 0.05);
-      g.gain.setValueAtAtTime(vol * 0.6, now + i * 0.55 + dur * 0.5);
-      g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.55 + dur + 0.5);
-
-      osc.connect(g);
-      g.connect(dest);
-      vibrato.start(now + i * 0.55);
-      vibrato.stop(now + i * 0.55 + dur + 1);
-      osc.start(now + i * 0.55);
-      osc.stop(now + i * 0.55 + dur + 1);
+      osc.frequency.value = scale[noteIdx] * (phraseIndex % 2 === 0 ? 1 : 2);
+      
+      const t = audioCtx.currentTime + i * 0.4;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.12, t + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
+      
+      // Gentle vibrato
+      const vib = audioCtx.createOscillator();
+      const vibGain = audioCtx.createGain();
+      vib.frequency.value = 5;
+      vibGain.gain.value = 3;
+      vib.connect(vibGain);
+      vibGain.connect(osc.frequency);
+      vib.start(t);
+      vib.stop(t + 0.7);
+      
+      osc.connect(gain);
+      gain.connect(dest);
+      osc.start(t);
+      osc.stop(t + 0.8);
     });
-  };
+    
+    phraseIndex++;
+  }, 2500);
 
-  const schedule = () => {
-    if (!stopFn) return;
-    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-    playPhrase(phrase, Math.random() > 0.5 ? 1 : 0);
-    setTimeout(schedule, phrase.length * 550 + 600 + Math.random() * 2000);
-  };
-  setTimeout(schedule, 2000);
-}
-
-function scheduleWinterWind(ctx, dest) {
-  const bufferSize = ctx.sampleRate * 3;
-  const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-  const data = noiseBuffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-  const noise = ctx.createBufferSource();
-  noise.buffer = noiseBuffer;
-  noise.loop = true;
-
-  const filter = ctx.createBiquadFilter();
-  filter.type = 'bandpass';
-  filter.frequency.value = 250;
-  filter.Q.value = 1;
-
-  const g = ctx.createGain();
-  g.gain.value = 0;
-
-  const now = ctx.currentTime;
-  g.gain.linearRampToValueAtTime(0.025, now + 4);
-  g.gain.linearRampToValueAtTime(0.015, now + 12);
-
-  noise.connect(filter);
-  filter.connect(g);
-  g.connect(dest);
-  noise.start();
+  setTimeout(() => clearInterval(melodyInterval), 15000);
 }
 
 // ─────────────────────────────────────────────
-// NFC Auto-Play (via URL params)
+// NFC Auto-Play via URL params
 // ─────────────────────────────────────────────
 (function autoPlayFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -1108,52 +850,21 @@ function scheduleWinterWind(ctx, dest) {
   if (flowerParam) {
     const f = flowers.find(f => f.id === flowerParam);
     if (f) {
-      // Small delay to let page render
       setTimeout(() => {
         openModal(f);
-        // Auto-start audio after 1 second
+        // Auto-play after a brief delay
         setTimeout(() => {
-          stopAudio();
-          startAudio(f.mood);
+          stopAllAudio();
+          playFlowerAudio(f.id);
           isPlaying = true;
-          resetPlayBtn();
           playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-          waveActive = true;
-          animateWaveform();
+          startWaveAnimation();
           soundHint.textContent = '♪ 正在播放...';
-        }, 800);
-      }, 300);
+        }, 600);
+      }, 400);
     }
   }
 })();
-
-// ─────────────────────────────────────────────
-// Time Counter
-// ─────────────────────────────────────────────
-let timeInterval = null;
-const TIME_STEPS = [0, 22]; // seconds for demo loop
-
-function startTimeCounter() {
-  clearInterval(timeInterval);
-  let sec = 0;
-  timeInterval = setInterval(() => {
-    if (!isPlaying) { clearInterval(timeInterval); audioTime.textContent = '0:00'; return; }
-    sec = (sec + 1) % 23;
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    audioTime.textContent = `${m}:${s.toString().padStart(2, '0')}`;
-  }, 1000);
-}
-
-// ─────────────────────────────────────────────
-// Toast
-// ─────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
 </script>
 </body>
 </html>
