@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>花叙 · 植物音乐图鉴 v2</title>
+  <title>花叙 · 植物音乐图鉴</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
   <style>
@@ -391,7 +391,7 @@
           <svg class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
           </svg>
-          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="75">
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
         </div>
       </div>
       <p class="sound-hint" id="soundHint">点击播放按钮，聆听自然声景</p>
@@ -447,9 +447,9 @@ const flowers = [
     tags: ['傲骨', '坚韧'],
     image: 'images/meihua-card.jpg',
     modalImage: 'images/meihua-modal.jpg',
-    desc: '墙角数枝梅，临寒独自开。冬日竹林间的风声，夹杂着竹叶的沙沙声，让人心神安宁。',
-    track: '竹林风声',
-    artist: '自然声景 · 安宁'
+    desc: '墙角数枝梅，临寒独自开。雪夜般的寂静，只有极轻的风声，让心灵归于平静。',
+    track: '雪夜寂静',
+    artist: '自然声景 · 冥想'
   }
 ];
 
@@ -457,20 +457,11 @@ const flowers = [
 // Build Grid
 // ─────────────────────────────────────────────
 const grid = document.getElementById('herbariumGrid');
-console.log('Building grid, found:', grid ? 'grid element' : 'NO GRID');
-
-flowers.forEach((f, i) => {
-  console.log('Creating card for:', f.nameFull);
+flowers.forEach(f => {
   const card = document.createElement('div');
   card.className = 'specimen-card';
-  
-  // 使用备用图片 URL 防止加载失败
-  const fallbackImg = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect fill="%23f5f3ef" width="200" height="200"/><text fill="%23999" x="50%" y="50%" text-anchor="middle" font-size="14">' + f.nameFull + '</text></svg>';
-  
   card.innerHTML = `
-    <div class="specimen-image">
-      <img src="${f.image}" alt="${f.nameFull}" loading="lazy" onerror="this.src='${fallbackImg}'">
-    </div>
+    <div class="specimen-image"><img src="${f.image}" alt="${f.nameFull}" loading="lazy"></div>
     <div class="specimen-info">
       <div class="specimen-header">
         <div>
@@ -488,10 +479,7 @@ flowers.forEach((f, i) => {
   `;
   card.addEventListener('click', () => openModal(f));
   grid.appendChild(card);
-  console.log('Card added:', i + 1);
 });
-
-console.log('Grid built with', flowers.length, 'cards');
 
 // ─────────────────────────────────────────────
 // Modal
@@ -641,38 +629,20 @@ function createPinkNoise(ctx, duration = 60) {
 }
 
 function startNatureSound(flowerId) {
-  // Safari 必须在用户交互中创建 AudioContext
-  try {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  } catch(e) {
-    console.error('AudioContext 创建失败:', e);
-    return;
-  }
+  // 每次播放创建新的 AudioContext
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   
-  // 强制解锁 Safari 的 AudioContext
-  const unlock = () => {
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume().then(() => {
-        console.log('🔓 Safari AudioContext 已解锁');
-      }).catch(err => {
-        console.error('解锁失败:', err);
-      });
-    }
-  };
-  
-  unlock();
-  
-  // 额外保险：如果还是 suspended，再试一次
+  // iOS/Safari 需要这个
   if (audioCtx.state === 'suspended') {
-    setTimeout(unlock, 100);
+    audioCtx.resume();
   }
 
   masterGain = audioCtx.createGain();
   masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(volumeSlider.value / 100 * 0.5, audioCtx.currentTime + 1.5);
+  masterGain.gain.linearRampToValueAtTime(volumeSlider.value / 100 * 0.35, audioCtx.currentTime + 1.5);
   masterGain.connect(audioCtx.destination);
 
-  console.log('🎵 Starting nature sound:', flowerId, '| State:', audioCtx.state, '| SampleRate:', audioCtx.sampleRate);
+  console.log('🎵 Starting nature sound:', flowerId, '| State:', audioCtx.state);
 
   if (flowerId === 'lotus') playLotusRain(audioCtx, masterGain);
   else if (flowerId === 'osmanthus') playOsmanthusWind(audioCtx, masterGain);
@@ -695,20 +665,14 @@ function playLotusRain(ctx, dest) {
   lowpass.frequency.value = 2500;
 
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0.3, ctx.currentTime);
+  gain.gain.value = 0.3;
 
   noise.connect(highpass);
   highpass.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
-  
-  try {
-    noise.start(0);
-    activeNodes.push(noise);
-    console.log('✅ 荷花雨声已启动');
-  } catch(e) {
-    console.error('启动失败:', e);
-  }
+  noise.start();
+  activeNodes.push(noise);
 
   // 水滴
   const dropInterval = setInterval(() => {
@@ -759,19 +723,13 @@ function playOsmanthusWind(ctx, dest) {
   lfo.start();
 
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0.22, ctx.currentTime);
+  gain.gain.value = 0.22;
 
   noise.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
-  
-  try {
-    noise.start(0);
-    activeNodes.push(noise);
-    console.log('✅ 桂花风声已启动');
-  } catch(e) {
-    console.error('启动失败:', e);
-  }
+  noise.start();
+  activeNodes.push(noise);
 
   // 树叶沙沙
   const rustleInterval = setInterval(() => {
@@ -835,9 +793,8 @@ function playBirdChirp(ctx, dest) {
   osc.stop(ctx.currentTime + 0.25);
 }
 
-// ── 梅花：冬日竹林风声 ──
+// ── 梅花：雪夜寂静 ──
 function playPlumSilence(ctx, dest) {
-  // 基础风声（更明显）
   const noiseBuffer = createPinkNoise(ctx, 60);
   const noise = ctx.createBufferSource();
   noise.buffer = noiseBuffer;
@@ -845,65 +802,46 @@ function playPlumSilence(ctx, dest) {
 
   const lowpass = ctx.createBiquadFilter();
   lowpass.type = 'lowpass';
-  lowpass.frequency.value = 500; // 提高频点，让声音更明显
-
-  // LFO 模拟风忽大忽小
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.type = 'sine';
-  lfo.frequency.value = 0.08;
-  lfoGain.gain.value = 120;
-  lfo.connect(lfoGain);
-  lfoGain.connect(lowpass.frequency);
-  lfo.start(0);
+  lowpass.frequency.value = 250;
 
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0.18, ctx.currentTime); // 明显提高音量
+  gain.gain.value = 0.06;
 
   noise.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
-  
-  try {
-    noise.start(0);
-    activeNodes.push(noise);
-    console.log('✅ 梅花竹林风声已启动');
-  } catch(e) {
-    console.error('启动失败:', e);
-  }
+  noise.start();
+  activeNodes.push(noise);
 
-  // 竹叶沙沙声（更频繁）
-  const rustleInterval = setInterval(() => {
+  // 偶尔的微风
+  const breezeInterval = setInterval(() => {
     if (!isPlaying || !audioCtx) return;
-    playBambooRustle(ctx, dest);
-  }, 180 + Math.random() * 350);
+    if (Math.random() > 0.65) {
+      playSoftBreeze(ctx, dest);
+    }
+  }, 2500);
 
-  setTimeout(() => clearInterval(rustleInterval), 58000);
+  setTimeout(() => clearInterval(breezeInterval), 58000);
 }
 
-function playBambooRustle(ctx, dest) {
-  const bufferSize = Math.floor(ctx.sampleRate * 0.15);
+function playSoftBreeze(ctx, dest) {
+  const bufferSize = ctx.sampleRate * 1.5;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
+
   for (let i = 0; i < bufferSize; i++) {
-    data[i] = (Math.random() * 2 - 1) * Math.exp(-i / bufferSize * 4);
+    const envelope = Math.sin(i / bufferSize * Math.PI);
+    data[i] = (Math.random() * 2 - 1) * envelope * 0.25;
   }
 
   const noise = ctx.createBufferSource();
   noise.buffer = buffer;
 
-  const highpass = ctx.createBiquadFilter();
-  highpass.type = 'highpass';
-  highpass.frequency.value = 1800; // 竹叶高频沙沙声
+  const lowpass = ctx.createBiquadFilter();
+  lowpass.type = 'lowpass';
+  lowpass.frequency.value = 350;
 
   const gain = ctx.createGain();
-  gain.gain.value = 0.06 + Math.random() * 0.04; // 更明显的沙沙声
-
-  noise.connect(highpass);
-  highpass.connect(gain);
-  gain.connect(dest);
-  noise.start(0);
-}
   gain.gain.value = 0.05;
 
   noise.connect(lowpass);
@@ -947,4 +885,3 @@ function showToast(msg) {
 </script>
 </body>
 </html>
-
