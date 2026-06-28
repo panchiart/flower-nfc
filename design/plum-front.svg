@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 梅花明信片正面设计 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1248 1732" width="1248" height="1732">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8bbd0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1248" height="1732" fill="url(#bgGrad)"/>
+  
+  <!-- 梅花枝干 -->
+  <path d="M 300 900 Q 500 800 624 750 Q 750 700 900 800" stroke="#5d4037" stroke-width="8" fill="none"/>
+  <path d="M 624 750 Q 650 700 680 720" stroke="#5d4037" stroke-width="5" fill="none"/>
+  <path d="M 624 750 Q 600 700 570 720" stroke="#5d4037" stroke-width="5" fill="none"/>
+  
+  <!-- 梅花 -->
+  <g opacity="0.9">
+    <!-- 花瓣 -->
+    <circle cx="624" cy="680" r="30" fill="#f48fb1"/>
+    <circle cx="654" cy="690" r="28" fill="#f06292"/>
+    <circle cx="640" cy="710" r="26" fill="#ec407a"/>
+    <circle cx="610" cy="690" r="27" fill="#f48fb1"/>
+    <circle cx="620" cy="670" r="25" fill="#f06292"/>
+    
+    <!-- 花芯 -->
+    <circle cx="624" cy="690" r="12" fill="#fff59d"/>
+  </g>
+  
+  <!-- 标题 -->
+  <text x="624" y="300" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="72" font-weight="bold" fill="#c62828" text-anchor="middle">梅花</text>
+  <text x="624" y="370" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="36" fill="#e53935" text-anchor="middle" font-style="italic">Plum Blossom</text>
+  
+  <line x1="474" y1="400" x2="774" y2="400" stroke="#ef5350" stroke-width="2" opacity="0.6"/>
+  
+  <text x="624" y="1600" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" fill="#c62828" text-anchor="middle" opacity="0.7">📱 将手机靠近花朵中央</text>
+</svg>

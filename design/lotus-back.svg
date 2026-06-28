@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 荷花明信片背面设计 (105x148mm @ 300DPI) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1248 1732" width="1248" height="1732">
+  <!-- 背景：白色 -->
+  <rect width="1248" height="1732" fill="#ffffff"/>
+  
+  <!-- 边框装饰 -->
+  <rect x="100" y="100" width="1048" height="1532" fill="none" stroke="#f48fb1" stroke-width="3" rx="20"/>
+  <rect x="120" y="120" width="1008" height="1492" fill="none" stroke="#fce4ec" stroke-width="1" rx="15"/>
+  
+  <!-- 顶部：花朵名称 -->
+  <text x="624" y="250" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="96" font-weight="bold" fill="#c2185b" text-anchor="middle">🪷</text>
+  <text x="624" y="380" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="64" font-weight="bold" fill="#c2185b" text-anchor="middle">荷花</text>
+  <text x="624" y="450" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="32" fill="#e91e63" text-anchor="middle" font-style="italic">Lotus · Nelumbo nucifera</text>
+  
+  <!-- 分隔线 -->
+  <line x1="300" y1="520" x2="948" y2="520" stroke="#f48fb1" stroke-width="2"/>
+  
+  <!-- 花语 -->
+  <text x="624" y="620" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="40" fill="#c2185b" text-anchor="middle" font-weight="bold">花语</text>
+  <text x="624" y="700" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="36" fill="#e91e63" text-anchor="middle">"出淤泥而不染"</text>
+  
+  <!-- 故事 -->
+  <foreignObject x="200" y="780" width="848" height="400">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: PingFang SC, Microsoft YaHei, sans-serif; font-size: 28px; color: #666; line-height: 1.8; text-align: center;">
+      荷花，夏日水面上最美的诗篇。<br/>
+      清晨的露珠在花瓣上滚动，宛如珍珠。<br/>
+      微风过处，清香阵阵，<br/>
+      仿佛能洗涤心灵的尘埃。
+    </div>
+  </foreignObject>
+  
+  <!-- NFC 区域提示 -->
+  <rect x="424" y="1200" width="400" height="200" fill="#fce4ec" rx="20" opacity="0.6"/>
+  <text x="624" y="1270" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="32" fill="#c2185b" text-anchor="middle" font-weight="bold">📱 NFC 感应区</text>
+  <text x="624" y="1320" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="24" fill="#e91e63" text-anchor="middle">将手机靠近此区域</text>
+  <text x="624" y="1360" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="24" fill="#e91e63" text-anchor="middle">即可聆听荷花音乐</text>
+  
+  <!-- 底部：网址 -->
+  <text x="624" y="1550" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" fill="#999" text-anchor="middle">panchiart.com/flower/lotus</text>
+  
+  <!-- 底部装饰 -->
+  <line x1="300" y1="1600" x2="948" y2="1600" stroke="#f48fb1" stroke-width="1" opacity="0.5"/>
+  <text x="624" y="1660" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="24" fill="#bbb" text-anchor="middle">听花语 · 用音乐读懂花朵</text>
+</svg>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 桂花明信片正面设计 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1248 1732" width="1248" height="1732">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff8e1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffecb3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1248" height="1732" fill="url(#bgGrad)"/>
+  
+  <!-- 桂花装饰 -->
+  <g opacity="0.8">
+    <!-- 桂花簇 -->
+    <circle cx="624" cy="750" r="25" fill="#fdd835"/>
+    <circle cx="640" cy="740" r="20" fill="#f9a825"/>
+    <circle cx="610" cy="755" r="22" fill="#fdd835"/>
+    <circle cx="635" cy="770" r="18" fill="#f9a825"/>
+    <circle cx="620" cy="735" r="20" fill="#fdd835"/>
+    <circle cx="645" cy="760" r="22" fill="#f9a825"/>
+    <circle cx="605" cy="745" r="19" fill="#fdd835"/>
+    <circle cx="650" cy="750" r="21" fill="#f9a825"/>
+    <circle cx="615" cy="765" r="20" fill="#fdd835"/>
+    <circle cx="640" cy="775" r="18" fill="#f9a825"/>
+  </g>
+  
+  <!-- 标题 -->
+  <text x="624" y="300" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="72" font-weight="bold" fill="#f57f17" text-anchor="middle">桂花</text>
+  <text x="624" y="370" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="36" fill="#f9a825" text-anchor="middle" font-style="italic">Osmanthus</text>
+  
+  <line x1="474" y1="400" x2="774" y2="400" stroke="#fbc02d" stroke-width="2" opacity="0.6"/>
+  
+  <text x="624" y="1600" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" fill="#f57f17" text-anchor="middle" opacity="0.7">📱 将手机靠近花朵中央</text>
+</svg>
