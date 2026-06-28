@@ -1,12 +1,2 @@
-# Cloudflare Pages routing configuration
-
-# 首页
-/index                   /index.html
-
-# 联系页面
-/contact                 /contact.html
-
-# 兼容性：如果有旧链接指向 flower/ 页面
-/flower/lotus            /index.html
-/flower/osmanthus        /index.html
-/flower/plum             /index.html
+# Cloudflare Pages routing
+/contact    /contact.html
