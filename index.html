@@ -457,11 +457,20 @@ const flowers = [
 // Build Grid
 // ─────────────────────────────────────────────
 const grid = document.getElementById('herbariumGrid');
-flowers.forEach(f => {
+console.log('Building grid, found:', grid ? 'grid element' : 'NO GRID');
+
+flowers.forEach((f, i) => {
+  console.log('Creating card for:', f.nameFull);
   const card = document.createElement('div');
   card.className = 'specimen-card';
+  
+  // 使用备用图片 URL 防止加载失败
+  const fallbackImg = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect fill="%23f5f3ef" width="200" height="200"/><text fill="%23999" x="50%" y="50%" text-anchor="middle" font-size="14">' + f.nameFull + '</text></svg>';
+  
   card.innerHTML = `
-    <div class="specimen-image"><img src="${f.image}" alt="${f.nameFull}" loading="lazy"></div>
+    <div class="specimen-image">
+      <img src="${f.image}" alt="${f.nameFull}" loading="lazy" onerror="this.src='${fallbackImg}'">
+    </div>
     <div class="specimen-info">
       <div class="specimen-header">
         <div>
@@ -479,7 +488,10 @@ flowers.forEach(f => {
   `;
   card.addEventListener('click', () => openModal(f));
   grid.appendChild(card);
+  console.log('Card added:', i + 1);
 });
+
+console.log('Grid built with', flowers.length, 'cards');
 
 // ─────────────────────────────────────────────
 // Modal
