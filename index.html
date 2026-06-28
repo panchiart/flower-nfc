@@ -447,9 +447,9 @@ const flowers = [
     tags: ['傲骨', '坚韧'],
     image: 'images/meihua-card.jpg',
     modalImage: 'images/meihua-modal.jpg',
-    desc: '墙角数枝梅，临寒独自开。雪夜般的寂静，只有极轻的风声，让心灵归于平静。',
-    track: '雪夜寂静',
-    artist: '自然声景 · 冥想'
+    desc: '墙角数枝梅，临寒独自开。冬日竹林间的风声，夹杂着竹叶的沙沙声，让人心神安宁。',
+    track: '竹林风声',
+    artist: '自然声景 · 安宁'
   }
 ];
 
@@ -823,8 +823,9 @@ function playBirdChirp(ctx, dest) {
   osc.stop(ctx.currentTime + 0.25);
 }
 
-// ── 梅花：雪夜寂静 ──
+// ── 梅花：冬日竹林风声 ──
 function playPlumSilence(ctx, dest) {
+  // 基础风声（更明显）
   const noiseBuffer = createPinkNoise(ctx, 60);
   const noise = ctx.createBufferSource();
   noise.buffer = noiseBuffer;
@@ -832,51 +833,65 @@ function playPlumSilence(ctx, dest) {
 
   const lowpass = ctx.createBiquadFilter();
   lowpass.type = 'lowpass';
-  lowpass.frequency.value = 250;
+  lowpass.frequency.value = 500; // 提高频点，让声音更明显
+
+  // LFO 模拟风忽大忽小
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.08;
+  lfoGain.gain.value = 120;
+  lfo.connect(lfoGain);
+  lfoGain.connect(lowpass.frequency);
+  lfo.start(0);
 
   const gain = ctx.createGain();
-  gain.gain.value = 0.06;
+  gain.gain.setValueAtTime(0.18, ctx.currentTime); // 明显提高音量
 
   noise.connect(lowpass);
   lowpass.connect(gain);
   gain.connect(dest);
+  
   try {
     noise.start(0);
     activeNodes.push(noise);
-    console.log("✅ 雨声已启动");
+    console.log('✅ 梅花竹林风声已启动');
   } catch(e) {
-    console.error("启动失败:", e);
+    console.error('启动失败:', e);
   }
 
-  // 偶尔的微风
-  const breezeInterval = setInterval(() => {
+  // 竹叶沙沙声（更频繁）
+  const rustleInterval = setInterval(() => {
     if (!isPlaying || !audioCtx) return;
-    if (Math.random() > 0.65) {
-      playSoftBreeze(ctx, dest);
-    }
-  }, 2500);
+    playBambooRustle(ctx, dest);
+  }, 180 + Math.random() * 350);
 
-  setTimeout(() => clearInterval(breezeInterval), 58000);
+  setTimeout(() => clearInterval(rustleInterval), 58000);
 }
 
-function playSoftBreeze(ctx, dest) {
-  const bufferSize = ctx.sampleRate * 1.5;
+function playBambooRustle(ctx, dest) {
+  const bufferSize = Math.floor(ctx.sampleRate * 0.15);
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
-
   for (let i = 0; i < bufferSize; i++) {
-    const envelope = Math.sin(i / bufferSize * Math.PI);
-    data[i] = (Math.random() * 2 - 1) * envelope * 0.25;
+    data[i] = (Math.random() * 2 - 1) * Math.exp(-i / bufferSize * 4);
   }
 
   const noise = ctx.createBufferSource();
   noise.buffer = buffer;
 
-  const lowpass = ctx.createBiquadFilter();
-  lowpass.type = 'lowpass';
-  lowpass.frequency.value = 350;
+  const highpass = ctx.createBiquadFilter();
+  highpass.type = 'highpass';
+  highpass.frequency.value = 1800; // 竹叶高频沙沙声
 
   const gain = ctx.createGain();
+  gain.gain.value = 0.06 + Math.random() * 0.04; // 更明显的沙沙声
+
+  noise.connect(highpass);
+  highpass.connect(gain);
+  gain.connect(dest);
+  noise.start(0);
+}
   gain.gain.value = 0.05;
 
   noise.connect(lowpass);
